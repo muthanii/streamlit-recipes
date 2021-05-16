@@ -1,12 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 
-"""List of websites:
-1. Epicurious
+# List of websites:
+# 1. Epicurious
 
-Problems:
-1. Getting duplicate titles and links
-"""
+# Problems:
+# 1. Getting duplicate titles and links
+
 
 # Epicurious Website Class 
 class Epicurious:
