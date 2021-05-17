@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 # 1. Epicurious
 
 # Problems:
-# 1. Getting duplicate titles and links
+# None (for now)
 
 
 # Epicurious Website Class 
@@ -35,9 +35,15 @@ class Epicurious:
             links.append("https://epicurious.com" + link.attrs["href"])
         return links
 
-    # def get_duplicates(self, data):
-    #     duplicates = {}
-    #     for key, value in data.items():
-    #         duplicates.setdefault(value, set()).add(key)
-    #     result = filter(lambda x: len(x)>1, duplicates.values())
-    #     return list(result)
+    def filter_items(self, titles, links):
+        """filter_items(titles, links) = Get a dictionary {"title": "links"} free from duplicates"""
+        import pprint
+
+        if len(titles) == len(links):
+            dictionary = {titles[i]: links[i] for i in range(len(titles))}
+
+            for i in list(dictionary):
+                if len(i) <= 10:
+                    del dictionary[i]
+            else:
+                pprint.pprint(dictionary)
