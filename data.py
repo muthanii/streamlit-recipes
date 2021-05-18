@@ -22,6 +22,7 @@ class Epicurious:
         return links
 
     def filter_links(self, links):
+        """filter_links(links) = Get links free from duplicates and wrong sites"""
         filtered_links = []
         for i in links:
             if "https://epicurious.com/recipes/" in i:
