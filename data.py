@@ -1,13 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
 
-# List of websites:
-# 1. Epicurious
-
-# Problems:
-# None (for now)
-
-
 # Epicurious Website Class 
 class Epicurious:
     
@@ -20,13 +13,6 @@ class Epicurious:
         soup = BeautifulSoup(src, "lxml")
         recipes = soup.find_all("a", {"class": "view-complete-item"})
         return recipes
-    
-    def get_titles(self, soup):
-        """get_titles(soup) = Get titles from a specified soup (search result)"""
-        titles = []
-        for title in soup:
-            titles.append(title.text[4:])
-        return titles
 
     def get_links(self, soup):
         """get_links(soup) = Get links from a specified soup (search result)"""
@@ -35,15 +21,17 @@ class Epicurious:
             links.append("https://epicurious.com" + link.attrs["href"])
         return links
 
-    def filter_items(self, titles, links):
-        """filter_items(titles, links) = Get a dictionary {"title": "links"} free from duplicates"""
-        import pprint
-
-        if len(titles) == len(links):
-            dictionary = {titles[i]: links[i] for i in range(len(titles))}
-
-            for i in list(dictionary):
-                if len(i) <= 10:
-                    del dictionary[i]
-            else:
-                pprint.pprint(dictionary)
+    def filter_links(self, links):
+        filtered_links = []
+        for i in links:
+            if "https://epicurious.com/recipes/" in i:
+                filtered_links.append(i)
+        else:
+            result = []
+            result.append(filtered_links[0])
+            for i in filtered_links:
+                if i in result:
+                    pass
+                else:
+                    result.append(i)
+        return result
