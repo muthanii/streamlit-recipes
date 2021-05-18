@@ -7,11 +7,14 @@ TITLE = st.title("recipeo")
 
 USER_INPUT = st.text_input("What are you looking for?")
     
-e = Epicurious(USER_INPUT)
+e = Epicurious("chicken")
+soup = e.get_soup()
+links = e.get_links(soup)
+srcs = e.filter_links(links)
 
-while USER_INPUT:
-    soup = e.get_soup()
-    links = e.get_links(soup)
-    srcs = e.filter_links(links)
-    i = random.randint(0, len(srcs))
-    components.iframe(srcs[i], height=800, scrolling=True)
+if USER_INPUT:
+    try:
+        i = random.randint(0, len(srcs))
+        components.iframe(srcs[i], height=800, scrolling=True)
+    except IndexError:
+        st.write("Search for something else.")
