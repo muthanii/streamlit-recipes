@@ -7,7 +7,7 @@ TITLE = st.title("recipeo")
 
 USER_INPUT = st.text_input("What are you looking for?")
     
-e = Epicurious("chicken")
+e = Epicurious(USER_INPUT)
 soup = e.get_soup()
 links = e.get_links(soup)
 srcs = e.filter_links(links)
